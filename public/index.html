@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Anton|Bungee|Fjalla+One" rel="stylesheet">
+
+    <title>Document</title>
+    </head>
+  
+  <style>
+
+
+    .fullscreen-bg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: -100;
+    }
+
+    .fullscreen-bg__video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    @media (min-aspect-ratio: 16/9) {
+        .fullscreen-bg__video {
+            height: 300%;
+            top: -100%;
+        }
+    }
+    
+    @media (max-aspect-ratio: 16/9) {
+        .fullscreen-bg__video {
+            width: 300%;
+            left: -100%;
+        }
+    }
+    
+    @media (max-width: 767px) {
+        .fullscreen-bg {
+            background: url('../img/videoframe.jpg') center center / cover no-repeat;
+        }
+        .fullscreen-bg__video {
+            display: none;
+        }
+    }
+    
+    #wrapper {
+        width: 960px;
+        margin: 0 auto;
+        padding-top: 5%;
+        color: #ffae19;
+        font-family: 'Bungee', cursive;
+        opacity: .7;
+    }
+    .wrapper {
+      width: 960px;
+        margin: 0 auto;
+        padding-top: 5%;
+        color: #ffae19;
+font-family: 'Anton', sans-serif;
+
+    }
+    #articles {
+        width: 60%;
+        height: 700px;
+        display: inline-block;
+        overflow: auto;
+    }
+    
+    #notes {
+        width: 30%;
+        float: right;
+    }
+    
+    textarea,
+    input {
+        display: block;
+        width: 100%;
+        background-color: #FCF5C7;
+    }
+    
+    input {
+        height: 36px;
+        font-size: 24px;
+    }
+    
+    textarea {
+        height: 200px;
+        font-size: 18px;
+    }
+    </style>
+</head>
+
+<body>
+    
+    <div id="wrapper" style="">
+        <h1 class="jumbotron">Scraping <a href="https://reddit.com">reddit</a></h1>
+        
+
+      <div class="page-header">
+        <h1 style="font-family: 'Fjalla One', sans-serif;">Most recent articles <small>Click on a paragraph to add notes</small></h1>
+      </div>
+  </div>
+    <div class="wrapper container">
+      <div id="articles" style="font-family: 'Arial', sans-serif"></div>
+      <div id="notes"></div>
+    </div>
+
+
+
+    <script type="text/javascript">
+    var rev = "fwd";
+
+    function titlebar(val) {
+        var msg = "Scraping with Mongoose and more";
+        var res = " ";
+        var speed = 20;
+        var pos = val;
+
+        msg = "|--- " + msg + " ---|";
+        var le = msg.length;
+        if (rev == "fwd") {
+            if (pos < le) {
+                pos = pos + 1;
+                scroll = msg.substr(0, pos);
+                document.title = scroll;
+                timer = window.setTimeout("titlebar(" + pos + ")", speed);
+            } else {
+                rev = "bwd";
+                timer = window.setTimeout("titlebar(" + pos + ")", speed);
+            }
+        } else {
+            if (pos > 0) {
+                pos = pos - 1;
+                var ale = le - pos;
+                scrol = msg.substr(ale, le);
+                document.title = scrol;
+                timer = window.setTimeout("titlebar(" + pos + ")", speed);
+            } else {
+                rev = "fwd";
+                timer = window.setTimeout("titlebar(" + pos + ")", speed);
+            }
+        }
+    }
+    titlebar(0);
+    </script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
